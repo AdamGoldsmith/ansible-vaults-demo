@@ -55,6 +55,21 @@ localhost | SUCCESS => {
 }
 ```
 
+Alternatively, edit `ansible.cfg` and change the `inventory` key to point to the environment inventory of your choice, eg:
+
+```ini
+inventory = inv.d/production
+```
+
+Now run the ansible command without the need for the `ANSIBLE_INVENTORY` variable prefix:
+
+```bash
+ansible localhost -m debug -a "var=db_password"
+localhost | SUCCESS => {
+    "db_password": "567890"
+}
+```
+
 ## WARNING
 
 The ansible-vault encrypt/decrypt passwords are stored inside this repo as it's purely for demonstration purposes - this is utterly stupid in a real-life scenario so remember to create these files outside the repo and update the reference to them in `ansible.cfg` here:
